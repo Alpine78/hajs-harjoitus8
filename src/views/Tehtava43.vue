@@ -20,7 +20,7 @@ export default {
     }
   },
   methods: {
-    async fetchData() {
+    fetchData () {
       let vm = this;
       fetch(this.url)
           .then(function(response) {
@@ -48,7 +48,7 @@ export default {
           });
     }
   },
-  created() {
+  created () {
     this.fetchData();
   }
 }
