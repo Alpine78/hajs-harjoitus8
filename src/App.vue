@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Etusivu</router-link> |
+      <router-link to="/tehtava43">Tehtava 43</router-link> |
+      <router-link to="/tehtava44">Tehtava 44</router-link> |
+      <router-link to="/tehtava45">Tehtava 45</router-link> |
+      <router-link to="/tehtava46">Tehtava 46</router-link>
     </div>
     <router-view/>
   </div>

@@ -14,12 +14,36 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/tehtava43',
+      name: 'tehtava43',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import(/* webpackChunkName: "tehtava43" */ './views/Tehtava43.vue')
+    },
+    {
+      path: '/tehtava44',
+      name: 'tehtava44',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "tehtava44" */ './views/Tehtava44.vue')
+    },
+    {
+      path: '/tehtava45',
+      name: 'tehtava45',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "tehtava45" */ './views/Tehtava45.vue')
+    },
+    {
+      path: '/tehtava46',
+      name: 'tehtava46',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "tehtava46" */ './views/Tehtava46.vue')
     }
   ]
 })
