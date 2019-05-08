@@ -9,19 +9,21 @@ ohjelmointikielen XML-kirjastolla. Jos kysely palauttaa JSON:a eikä XML:ää, l
 otsikkoon kenttä ”Accept: application/xml”:
 Pythonilla: request.add_header(’Accept’, ’application/xml’);
 Java:lla: connection.setRequestProperty("Accept", "application/xml");</p>
+<p>XML:ää ei saa kaikista postinumeroista. Esim. 74595 antaa XML:ää.</p>
     <form v-on:submit.prevent="fetchData">
-      <input type="number" maxlength="5" v-model="zip">
+      <input type="number" maxlength="5" v-model="zip" placeholder="Postinumero">
       <button>Hae</button>
     </form>
 
     <p v-if="hasFetched">
-      Postinumeron {{ fetchedZip }} lähin noutopiste on paikkakunnalla {{ result[0].City }} osoitteessa {{ result[0].Address }}.
+      Postinumeron {{ fetchedZip }} lähin noutopiste on paikkakunnalla {{ result.Municipality[0] }} osoitteessa {{ result.Address[0] }}. Noutopaikka on {{ result.AdditionalInfo[0] }}.
 
     </p>
   </div>
 </template>
 
 <script>
+// import axios from 'axios';
 
 export default {
   name: 'tehtava45',
@@ -40,12 +42,31 @@ export default {
       vm.fetchedZip = '';
       let url = `https://ohjelmat.posti.fi/pup/v1/pickuppoints?zipcode=${this.zip}`;
       console.log('Haetaan: ', url);
+      // const headers = {
+      //   'Accept': 'application/xml'
+      // };
+      // axios.get(url, {headers})
+      //   .then(function (response) {
+      //     console.log(response.data);
+
+      //   }) 
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });     
 
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           console.log(this.responseText);
-          vm.result = JSON.parse(this.responseText);
+          // Postinumerosta riippuen saattaa tulla XML tai JSON
+
+          var parseString = require('xml2js').parseString;
+          // var xml = "<root>Hello xml2js!</root>"
+          parseString(this.responseText, function (err, result) {
+            // console.dir(result.ArrayOfPickupPoint.PickupPoint[0]);
+            vm.result = result.ArrayOfPickupPoint.PickupPoint[0];
+          });
+          // vm.result = JSON.parse(this.responseText);
           console.log(vm.result);
           vm.fetchedZip = vm.zip;
           vm.hasFetched = true;
@@ -53,9 +74,8 @@ export default {
       };
       xhttp.open("GET", url, true);
       xhttp.setRequestHeader('Accept', 'application/xml');
-      xhttp.send();
-  
-    }
+      xhttp.send();  
+    },
   }
 }
 </script>

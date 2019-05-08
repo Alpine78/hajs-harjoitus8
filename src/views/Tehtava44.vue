@@ -32,6 +32,7 @@ export default {
       let apiKey = 'b6907d289e10d714a6e88b30761fae22';
       let url = `https://openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKey}`;
       console.log(url);
+
       fetch(url)
         .then(
           function(response) {
@@ -51,7 +52,7 @@ export default {
         )
         .catch(function(err) {
           console.log('Fetch Error :-S', err);
-        });      
+        }); 
     },
     findMaxTemp () {
       let hottestDay;
